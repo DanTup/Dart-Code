@@ -27,13 +27,6 @@ jobs:
       - name: Setup XVFB
         if: matrix.os == 'ubuntu-latest'
         run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-        
-      - name: Setup Code Climate
-        if: matrix.os == 'ubuntu-latest' && matrix.dart-version == 'stable' && matrix.code-version == 'stable'
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
-          chmod +x ./cc-test-reporter;
-          ./cc-test-reporter before-build;
 
       - name: Setup Node v${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -85,10 +78,6 @@ jobs:
           CODE_VERSION: ${{ matrix.code-version }}
           LOGS_NAME: ${{ matrix.dart-version }}_${{ matrix.code-version }} 
 
-      - name: Upload coverage
-        if: success() && matrix.os == 'ubuntu-latest' && matrix.dart-version == 'stable' && matrix.code-version == 'stable'
-        run: ./cc-test-reporter after-build
-
       - name: Store logs
         uses: actions/upload-artifact@v1
         if: always()
@@ -102,6 +91,13 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: .test_results
+          
+      - name: Store coverage
+        uses: actions/upload-artifact@v1
+        if: success() && matrix.dart-version == 'stable' && matrix.code-version == 'stable'
+        with:
+          name: coverage-${{ matrix.os }}
+          path: coverage
 
 
   upload_logs:
@@ -150,6 +146,44 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  upload_coverage:
+  
+    name: Upload Coverage
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - uses: actions/checkout@v1
+
+      - name: Fetch Linux coverage
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage-ubuntu-latest
+          path: coverage/linux
+      #- name: Fetch Windows coverage
+      #  uses: actions/download-artifact@v1
+      #  with:
+      #    name: coverage-windows-latest
+      #    path: coverage/win
+      - name: Fetch macOS coverage
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage-macOS-latest
+          path: coverage/osx
+
+      - name: Combine coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
+          chmod +x ./cc-test-reporter;
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.linux.json coverage/linux/lcov.info;
+          # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.win.json coverage/win/lcov.info;
+          # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.osx.json coverage/osx/lcov.info;
+          # ./cc-test-reporter sum-coverage coverage/codeclimate.*.json;
+          ./cc-test-reporter upload-coverage
+
 
   notify_failure:
 
