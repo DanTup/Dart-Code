@@ -180,8 +180,8 @@ jobs:
           chmod +x ./cc-test-reporter;
           ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.linux.json coverage/linux/lcov.info;
           # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.win.json coverage/win/lcov.info;
-          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.osx.json coverage/osx/lcov.info;
-          ./cc-test-reporter sum-coverage coverage/codeclimate.*.json;
+          # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.osx.json coverage/osx/lcov.info;
+          # ./cc-test-reporter sum-coverage coverage/codeclimate.*.json;
           ./cc-test-reporter upload-coverage
 
 
