@@ -170,6 +170,8 @@ jobs:
           chmod +x ./cc-test-reporter
           ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/linux/lcov.info
           ./cc-test-reporter upload-coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 
   notify_failure:
