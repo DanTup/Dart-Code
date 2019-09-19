@@ -155,6 +155,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    
+      - uses: actions/checkout@v1
 
       - name: Fetch Linux coverage
         uses: actions/download-artifact@v1
