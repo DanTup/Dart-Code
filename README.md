@@ -16,7 +16,7 @@ mobile apps, and [AngularDart](https://angulardart.org) web apps.
 Dart Code can be [installed from the Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) or by [searching within VS Code](https://code.visualstudio.com/docs/editor/extension-gallery#_search-for-an-extension).
 
 
-## Features.
+## Features
 
 - Edit and Debug Flutter mobile apps
 - Edit and Debug Dart command line apps
