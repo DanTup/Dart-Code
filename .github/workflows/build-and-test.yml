@@ -94,7 +94,7 @@ jobs:
           
       - name: Store coverage
         uses: actions/upload-artifact@v1
-        if: always()
+        if: success() && matrix.dart-version == 'stable' && matrix.code-version == 'stable'
         with:
           name: coverage-${{ matrix.os }}
           path: coverage
@@ -146,6 +146,35 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  upload_coverage:
+  
+    name: Upload Coverage
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Fetch Linux coverage
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage-ubuntu-latest
+      #- name: Fetch Windows coverage
+      #  uses: actions/download-artifact@v1
+      #  with:
+      #    name: coverage-windows-latest
+      - name: Fetch macOS coverage
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage-macOS-latest
+
+      - name: Combine coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
+          chmod +x ./cc-test-reporter;
+          ./cc-test-reporter sum-coverage;
+          ./cc-test-reporter upload-coverage
 
 
   notify_failure:
