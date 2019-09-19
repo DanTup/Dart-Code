@@ -149,7 +149,7 @@ jobs:
 
   upload_coverage:
   
-    name: Upload Coverage
+    name: Send Coverage to CodeClimate
     needs: build
     if: always()
     runs-on: ubuntu-latest
@@ -163,25 +163,12 @@ jobs:
         with:
           name: coverage-ubuntu-latest
           path: coverage/linux
-      #- name: Fetch Windows coverage
-      #  uses: actions/download-artifact@v1
-      #  with:
-      #    name: coverage-windows-latest
-      #    path: coverage/win
-      - name: Fetch macOS coverage
-        uses: actions/download-artifact@v1
-        with:
-          name: coverage-macOS-latest
-          path: coverage/osx
 
       - name: Combine coverage
         run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
-          chmod +x ./cc-test-reporter;
-          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.linux.json coverage/linux/lcov.info;
-          # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.win.json coverage/win/lcov.info;
-          # ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.osx.json coverage/osx/lcov.info;
-          # ./cc-test-reporter sum-coverage coverage/codeclimate.*.json;
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.linux.json coverage/linux/lcov.info
           ./cc-test-reporter upload-coverage
 
 
