@@ -9,7 +9,7 @@ import { DartDebugClient } from "../../dart_debug_client";
 import { ensureVariable, killFlutterTester } from "../../debug_helpers";
 import { activate, defer, delay, ext, extApi, flutterWebBrokenMainFile, flutterWebHelloWorldExampleSubFolderMainFile, flutterWebHelloWorldFolder, flutterWebHelloWorldMainFile, getLaunchConfiguration, getPackages, logger, openFile, positionOf, sb, waitForResult, watchPromise } from "../../helpers";
 
-describe("flutter for web debugger", () => {
+describe.skip("flutter for web debugger", () => {
 	beforeEach("skip for Windows", function () {
 		// Skip on Windows temporarily until we figure out this is:
 		// https://github.com/dart-lang/webdev/issues/514

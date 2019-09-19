@@ -64,25 +64,25 @@ async function runAllTests(): Promise<void> {
 		}
 		if (!process.env.BOT || process.env.BOT === "flutter") {
 			await runTests("flutter_only", "flutter_hello_world");
-			await runTests("flutter_web_only", "flutter_web");
+			// await runTests("flutter_web_only", "flutter_web");
 		}
 		if (!process.env.BOT || process.env.BOT === "misc") {
-			await runTests("dart_create_tests", "dart_create_tests.code-workspace");
-			await runTests("not_activated/dart_create", "empty");
+			// await runTests("dart_create_tests", "dart_create_tests.code-workspace");
+			// await runTests("not_activated/dart_create", "empty");
 			await runTests("multi_root", "projects.code-workspace");
-			await runTests("multi_project_folder", "");
-			await runTests("not_activated/flutter_create", "empty");
-			await runTests("not_activated/flutter_web_create", "empty");
-			await runTests("flutter_create_tests", "flutter_create_tests.code-workspace");
-			await runTests("flutter_web_create_tests", "flutter_web_create_tests.code-workspace");
+			// await runTests("multi_project_folder", "");
+			// await runTests("not_activated/flutter_create", "empty");
+			// await runTests("not_activated/flutter_web_create", "empty");
+			// await runTests("flutter_create_tests", "flutter_create_tests.code-workspace");
+			// await runTests("flutter_web_create_tests", "flutter_web_create_tests.code-workspace");
 		}
 		if (!process.env.BOT || process.env.BOT === "flutter_repo") {
-			if (process.env.FLUTTER_REPO_PATH) {
-				await runTests("flutter_repository", process.env.FLUTTER_REPO_PATH);
-			} else {
-				console.error("process.env.FLUTTER_REPO_PATH not set, not running flutter_repo tests");
-				exitCode = 1;
-			}
+			// if (process.env.FLUTTER_REPO_PATH) {
+			// 	await runTests("flutter_repository", process.env.FLUTTER_REPO_PATH);
+			// } else {
+			// 	console.error("process.env.FLUTTER_REPO_PATH not set, not running flutter_repo tests");
+			// 	exitCode = 1;
+			// }
 		}
 	} catch (e) {
 		exitCode = 1;

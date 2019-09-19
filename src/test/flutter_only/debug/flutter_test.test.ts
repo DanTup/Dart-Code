@@ -8,7 +8,7 @@ import { DartDebugClient } from "../../dart_debug_client";
 import { killFlutterTester } from "../../debug_helpers";
 import { activate, defer, delay, ext, extApi, flutterHelloWorldFolder, flutterTestAnotherFile, flutterTestBrokenFile, flutterTestMainFile, flutterTestOtherFile, getExpectedResults, getLaunchConfiguration, getPackages, logger, makeTextTree, openFile, positionOf, withTimeout } from "../../helpers";
 
-describe("flutter test debugger", () => {
+describe.skip("flutter test debugger", () => {
 
 	// We have tests that require external packages.
 	before("get packages", () => getPackages());

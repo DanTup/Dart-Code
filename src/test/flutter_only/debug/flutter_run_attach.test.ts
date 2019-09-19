@@ -8,7 +8,7 @@ import { DartDebugClient } from "../../dart_debug_client";
 import { killFlutterTester, spawnFlutterProcess } from "../../debug_helpers";
 import { activate, defer, delay, ext, extApi, fileSafeCurrentTestName, flutterHelloWorldExampleSubFolder, flutterHelloWorldFolder, flutterHelloWorldMainFile, getAttachConfiguration, getPackages, logger, watchPromise } from "../../helpers";
 
-describe("flutter run debugger (attach)", () => {
+describe.skip("flutter run debugger (attach)", () => {
 	// We have tests that require external packages.
 	before("get packages", () => getPackages());
 	beforeEach("activate flutterHelloWorldMainFile", () => activate(flutterHelloWorldMainFile));

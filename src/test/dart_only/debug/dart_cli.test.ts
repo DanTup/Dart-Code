@@ -12,7 +12,7 @@ import { DartDebugClient } from "../../dart_debug_client";
 import { ensureFrameCategories, ensureMapEntry, ensureVariable, ensureVariableWithIndex, isExternalPackage, isLocalPackage, isSdkFrame, isUserCode, spawnDartProcessPaused } from "../../debug_helpers";
 import { activate, closeAllOpenFiles, defer, delay, ext, extApi, getAttachConfiguration, getDefinition, getLaunchConfiguration, getPackages, helloWorldBrokenFile, helloWorldDeferredEntryFile, helloWorldDeferredScriptFile, helloWorldExampleSubFolderMainFile, helloWorldFolder, helloWorldGettersFile, helloWorldGoodbyeFile, helloWorldHttpFile, helloWorldLocalPackageFile, helloWorldMainFile, helloWorldPartEntryFile, helloWorldPartFile, helloWorldPathFile, helloWorldThrowInExternalPackageFile, helloWorldThrowInLocalPackageFile, helloWorldThrowInSdkFile, logger, openFile, positionOf, sb, setConfigForTest, watchPromise, writeBrokenDartCodeIntoFileForTest } from "../../helpers";
 
-describe("dart cli debugger", () => {
+describe.skip("dart cli debugger", () => {
 	// We have tests that require external packages.
 	before("get packages", () => getPackages());
 	beforeEach("activate helloWorldMainFile", () => activate(helloWorldMainFile));
