@@ -170,6 +170,7 @@ jobs:
           chmod +x ./cc-test-reporter
           ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/linux/lcov.info
           export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          export GIT_SHA="${GITHUB_SHA}"
           ./cc-test-reporter upload-coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
