@@ -416,7 +416,7 @@ describe("dart cli debugger", () => {
 		]);
 	});
 
-	it("does not step into an external library if debugExternalLibraries is false", async () => {
+	it.only("does not step into an external library if debugExternalLibraries is false", async () => {
 		await openFile(helloWorldHttpFile);
 		// Get location for `http.read(`
 		const httpReadCall = positionOf("http.re^ad(");

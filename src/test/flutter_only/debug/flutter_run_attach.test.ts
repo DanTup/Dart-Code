@@ -51,7 +51,7 @@ describe("flutter run debugger (attach)", () => {
 		return config;
 	}
 
-	it("attaches to a Flutter application and remains active until told to detach", async () => {
+	it.only("attaches to a Flutter application and remains active until told to detach", async () => {
 		const process = await spawnFlutterProcess(flutterHelloWorldMainFile);
 		const observatoryUri = await process.observatoryUri;
 		const config = await attachDebugger(observatoryUri);

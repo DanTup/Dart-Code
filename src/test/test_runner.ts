@@ -25,7 +25,7 @@ module.exports = {
 	run(testsRoot: string, cb: (error: any, failures?: number) => void): void {
 		// Create the mocha test
 		const mocha = new Mocha({
-			forbidOnly: !!process.env.MOCHA_FORBID_ONLY,
+			// forbidOnly: !!process.env.MOCHA_FORBID_ONLY,
 			reporter: MultiReporter,
 			reporterOptions: {
 				output: process.env.TEST_XML_OUTPUT,
