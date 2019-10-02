@@ -3,7 +3,7 @@ name: Build and Test on Commit
 on:
   push:
     branches:
-      - gh-actions-test
+      - master
 
 jobs:
   build:
